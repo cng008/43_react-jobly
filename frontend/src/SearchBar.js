@@ -37,9 +37,9 @@ const SearchBar = ({ searchFor }) => {
         name="search"
         type="text"
         placeholder="Enter search term"
-        value={searchTerm.value}
+        value={searchTerm}
         onChange={handleChange}
-        autocomplete="off"
+        autoComplete="off"
         // required
       ></input>
       <button>Search</button>

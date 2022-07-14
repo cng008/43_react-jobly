@@ -4,10 +4,11 @@ import SearchBar from './SearchBar';
 import JoblyApi from './api';
 import CompanyCard from './CompanyCard';
 
-/** showing the list of all companies */
+/** Show list of all companies */
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(function getCompaniesOnMount() {
     console.debug('CompanyList useEffect getCompaniesOnMount');
@@ -18,6 +19,11 @@ const CompanyList = () => {
   async function search(name) {
     let companies = await JoblyApi.getCompanies(name);
     setCompanies(companies);
+    setIsLoading(false);
+  }
+
+  if (isLoading) {
+    return <p>Loading &hellip;</p>;
   }
 
   return (
