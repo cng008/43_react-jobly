@@ -9,7 +9,7 @@ import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import Profile from './Profile';
 
-const Routes = () => {
+const Routes = ({ login, signup }) => {
   return (
     <>
       <Switch>
@@ -18,11 +18,11 @@ const Routes = () => {
         </Route>
 
         <Route exact path="/login">
-          <LoginForm />
+          <LoginForm login={login} />
         </Route>
 
         <Route exact path="/signup">
-          <SignUpForm />
+          <SignUpForm signup={signup} />
         </Route>
 
         <Route exact path="/companies">
