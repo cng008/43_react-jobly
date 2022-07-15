@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import UserContext from './UserContext';
 
-const NavBar = ({ isLoggedIn, currentUser, logout }) => {
-  if (isLoggedIn) {
+const NavBar = ({ logout }) => {
+  const { currentUser } = useContext(UserContext);
+
+  if (currentUser) {
     return (
       <nav className="NavBar">
         <NavLink exact to="/">
@@ -18,7 +21,7 @@ const NavBar = ({ isLoggedIn, currentUser, logout }) => {
           Profile
         </NavLink>
         <Link to="/" onClick={logout}>
-          Log out {currentUser}
+          Log out {currentUser.username}
         </Link>
       </nav>
     );

@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Routes from './Routes';
 import { BrowserRouter } from 'react-router-dom';
 import JoblyApi from './api';
+import jwt from 'jsonwebtoken';
 import './App.css';
 
 import NavBar from './NavBar';
+import UserContext from './UserContext';
 
 const App = () => {
+  const [infoLoaded, setInfoLoaded] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState('token');
-  // const [isLoading, setIsLoading] = useState(true);
 
   console.debug(
     'App',
@@ -22,6 +24,29 @@ const App = () => {
     token
   );
 
+  useEffect(() => {
+    async function getCurrentUser() {
+      if (token) {
+        try {
+          let { username } = jwt.decode(token);
+          // put the token on the Api class so it can use it to call the API.
+          JoblyApi.token = token;
+          let currentUser = await JoblyApi.getCurrentUser(username);
+          setCurrentUser(currentUser);
+        } catch (err) {
+          console.error('App getCurrentUser: problem loading', err);
+          setCurrentUser(null);
+        }
+      }
+      setInfoLoaded();
+    }
+    // set infoLoaded to false while async getCurrentUser runs; once the
+    // data is fetched (or even if an error happens!), this will be set back
+    // to false to control the spinner.
+    setInfoLoaded(false);
+    getCurrentUser();
+  }, [token]);
+
   /** Handles site-wide signup.
    *
    * Automatically logs them in (set token) upon signup.
@@ -32,8 +57,7 @@ const App = () => {
       setToken(token);
       JoblyApi.token = token;
       setIsLoggedIn(true);
-      // setIsLoading(false);
-      // setCurrentUser(username)
+      setCurrentUser(token);
       return { success: true };
     } catch (errors) {
       console.error('signup failed', errors);
@@ -41,17 +65,13 @@ const App = () => {
     }
   }
 
-  /** Handles site-wide login.
-   *
-   * Make sure you await this function and check its return value!
-   */
+  /** Handles site-wide login. */
   async function login(loginData) {
     try {
       let token = await JoblyApi.login(loginData);
       setToken(token);
       setIsLoggedIn(true);
-      // setIsLoading(false);
-      // setCurrentUser(username)
+      setCurrentUser(token);
       return { success: true };
     } catch (errors) {
       console.error('login failed', errors);
@@ -59,24 +79,24 @@ const App = () => {
     }
   }
 
+  /** Handles site-wide logout. */
   const logout = () => {
     setIsLoggedIn(false);
     setCurrentUser(null);
     setToken('token');
   };
-  // if (isLoading) {
-  //   return <p>Loading &hellip;</p>;
-  // }
+
+  if (infoLoaded) {
+    return <p>Loading &hellip;</p>;
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar
-          isLoggedIn={isLoggedIn}
-          currentUser={currentUser}
-          logout={logout}
-        />
-        <Routes login={login} signup={signup} />
+        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+          <NavBar logout={logout} />
+          <Routes login={login} signup={signup} />
+        </UserContext.Provider>
       </BrowserRouter>
     </div>
   );

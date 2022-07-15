@@ -59,7 +59,6 @@ const LoginForm = ({ login }) => {
         name="username"
         type="text"
         placeholder="Username"
-        // value="testuser"
         value={formData.username}
         onChange={handleChange}
         // autoComplete="off"
@@ -72,7 +71,6 @@ const LoginForm = ({ login }) => {
         name="password"
         type="text"
         placeholder="Password"
-        // value="password"
         value={formData.password}
         onChange={handleChange}
         // autoComplete="off"

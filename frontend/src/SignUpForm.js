@@ -65,7 +65,6 @@ const SignUpForm = ({ signup }) => {
         name="username"
         type="text"
         placeholder="Username"
-        // value="testuser"
         value={formData.username}
         onChange={handleChange}
         // autoComplete="off"
@@ -78,7 +77,6 @@ const SignUpForm = ({ signup }) => {
         name="password"
         type="text"
         placeholder="Password"
-        // value="password"
         value={formData.password}
         onChange={handleChange}
         // autoComplete="off"
@@ -91,7 +89,6 @@ const SignUpForm = ({ signup }) => {
         name="firstName"
         type="text"
         placeholder="First Name"
-        // value="Test"
         value={formData.firstName}
         onChange={handleChange}
         // autoComplete="off"
@@ -104,7 +101,6 @@ const SignUpForm = ({ signup }) => {
         name="lastName"
         type="text"
         placeholder="Last Name"
-        // value="User"
         value={formData.lastName}
         onChange={handleChange}
         // autoComplete="off"
@@ -117,7 +113,6 @@ const SignUpForm = ({ signup }) => {
         name="email"
         type="text"
         placeholder="Email"
-        // value="testuser@email.com"
         value={formData.email}
         onChange={handleChange}
         // autoComplete="off"
