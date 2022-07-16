@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-/** User signup form */
+/** User signup form.
+ *
+ * Shows form and manages update to state on changes.
+ * On submission:
+ * - calls signup function prop
+ * - redirects to /companies route
+ *
+ * Routes -> SignupForm
+ * Routed as /signup
+ */
 
 const SignUpForm = ({ signup }) => {
   const history = useHistory();
@@ -34,18 +43,21 @@ const SignUpForm = ({ signup }) => {
     }));
   };
 
+  /** Handle form submit:
+   *
+   * Calls login func prop and, if successful, redirect to /companies.
+   */
   const handleSubmit = async evt => {
     evt.preventDefault();
     try {
       let result = await signup(formData);
       // makes a POST request to Api.js and adds corresponding data to matching category in db.json
       if (result.success) {
+        // imperatively redirect to correct page and refresh to see new data
         history.push('/companies');
       } else {
         setFormErrors(result.errors);
       }
-      // imperatively redirect to correct page and refresh to see new data
-      // window.location.reload(false);
     } catch (err) {
       console.log(err);
     }

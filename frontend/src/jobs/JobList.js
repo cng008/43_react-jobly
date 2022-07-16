@@ -4,7 +4,15 @@ import SearchBar from '../forms/SearchBar';
 import JoblyApi from '../api';
 import JobCardList from './JobCardList';
 
-/** Show list of all jobs */
+/** Show list of all jobs.
+ *
+ * On mount, loads jobs from API.
+ * Re-loads filtered jobs on submit from search form.
+ *
+ * JobList -> JobCardList -> JobCard
+ *
+ * Routed at /jobs
+ */
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);

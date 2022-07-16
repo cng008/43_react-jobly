@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './CompanyCard.css';
 
-/** Individual card component for CompanyList.
- * showing simple info about a company on the list */
+/** Show simple information about a company
+ *
+ * Is rendered by CompanyList to show a "card" for each company.
+ *
+ * CompanyList -> CompanyCard
+ */
 
 const CompanyCard = ({ handle, name, description, logoUrl }) => {
   return (

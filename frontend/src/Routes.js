@@ -10,6 +10,14 @@ import SignUpForm from './forms/SignUpForm';
 import ProfileForm from './forms/ProfileForm';
 import Protected from './ProtectedRoute';
 
+/** Site-wide routes.
+ *
+ * Parts of site are only visitable when logged in. Those routes are
+ * wrapped by <Protected>, which is an authorization component.
+ *
+ * Visiting a non-existant route redirects to the homepage.
+ */
+
 const Routes = ({ login, signup }) => {
   return (
     <>

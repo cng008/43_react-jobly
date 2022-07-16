@@ -1,7 +1,15 @@
 import React from 'react';
 
 /** Individual card component for JobList.
- * Show simple info about a job on the list */
+ *
+ * Show simple info about a job on the list
+ *
+ * Is rendered by JobCardList to show a "card" for each job.
+ *
+ * Receives apply func prop from parent, which is called on apply.
+ *
+ * JobCardList -> JobCard
+ */
 
 const JobCard = ({ id, title, salary, equity, companyName }) => {
   return (

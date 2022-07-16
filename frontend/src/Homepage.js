@@ -2,7 +2,14 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from './UserContext';
 
-/** Show homepage */
+/** Homepage of site.
+ *
+ * Shows welcome message or login/register buttons.
+ *
+ * Routes -> Homepage
+ *
+ * Routed at /
+ */
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);

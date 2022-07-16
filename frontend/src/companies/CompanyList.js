@@ -4,7 +4,15 @@ import SearchBar from '../forms/SearchBar';
 import JoblyApi from '../api';
 import CompanyCard from './CompanyCard';
 
-/** Show list of all companies */
+/** Show list of all companies.
+ *
+ * On mount, loads companies from API.
+ * Re-loads filtered companies on submit from search form.
+ *
+ * Routes -> { CompanyCard, SearchForm }
+ *
+ * Routed to at /companies
+ */
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);

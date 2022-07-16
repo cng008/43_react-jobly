@@ -2,6 +2,18 @@ import React, { useState, useContext } from 'react';
 import UserContext from '../UserContext';
 import JoblyApi from '../api';
 
+/** Edit profile form.
+ *
+ * Displays profile form and handles changes to local form state.
+ * Submitting the form calls the API to save, and triggers user info reloading
+ * throughout the site.
+ *
+ * Confirmation of a successful save.
+ *
+ * Routed as /profile
+ * Routes -> ProfileForm
+ */
+
 const ProfileForm = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const INITIAL_STATE = {
@@ -35,6 +47,13 @@ const ProfileForm = () => {
     setFormErrors([]);
   };
 
+  /** on form submit:
+   * - attempt save to backend & report any errors
+   * - if successful
+   *   - clear previous error messages and password
+   *   - show save-confirmed message
+   *   - set current user info throughout the site
+   */
   const handleSubmit = async evt => {
     evt.preventDefault();
 
