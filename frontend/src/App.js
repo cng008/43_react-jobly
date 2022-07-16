@@ -28,10 +28,21 @@ export const TOKEN_STORAGE_ID = 'jobly-token';
 
 const App = () => {
   const [infoLoaded, setInfoLoaded] = useState(false);
+  const [applicationIds, setApplicationIds] = useState(new Set([]));
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
-  console.debug('App', 'currentUser=', currentUser, 'token=', token);
+  console.debug(
+    'App',
+    'infoLoaded=',
+    infoLoaded,
+    'applicationIds=',
+    applicationIds,
+    'currentUser=',
+    currentUser,
+    'token=',
+    token
+  );
 
   // Load user info from API. Until a user is logged in and they have a token,
   // this should not run. It only needs to re-run when a user logs out, so
@@ -45,13 +56,14 @@ const App = () => {
           // put the token on the Api class so it can use it to call the API.
           JoblyApi.token = token;
           let currentUser = await JoblyApi.getCurrentUser(username);
+          setApplicationIds(new Set(currentUser.applications));
           setCurrentUser(currentUser);
         } catch (err) {
           console.error('App getCurrentUser: problem loading', err);
           setCurrentUser(null);
         }
       }
-      setInfoLoaded();
+      setInfoLoaded(true);
     }
     // set infoLoaded to false while async getCurrentUser runs; once the
     // data is fetched (or even if an error happens!), this will be set back
@@ -90,20 +102,34 @@ const App = () => {
     }
   }
 
+  /** Checks if a job has been applied for. */
+  function hasAppliedToJob(id) {
+    return applicationIds.has(id);
+  }
+
+  /** Apply to a job: make API call and update set of application IDs. */
+  function applyToJob(id) {
+    if (hasAppliedToJob(id)) return;
+    JoblyApi.applyToJob(currentUser.username, id);
+    setApplicationIds(new Set([...applicationIds, id]));
+  }
+
   /** Handles site-wide logout. */
   const logout = () => {
     setCurrentUser(null);
     setToken('token');
   };
 
-  if (infoLoaded) {
+  if (!infoLoaded) {
     return <p>Loading &hellip;</p>;
   }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <UserContext.Provider
+          value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}
+        >
           <NavBar logout={logout} />
           <Routes login={login} signup={signup} />
         </UserContext.Provider>
