@@ -2,12 +2,13 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Homepage from './Homepage';
-import CompanyList from './CompanyList';
-import CompanyDetail from './CompanyDetail';
-import JobList from './JobList';
-import LoginForm from './LoginForm';
-import SignUpForm from './SignUpForm';
-import Profile from './Profile';
+import CompanyList from './companies/CompanyList';
+import CompanyDetail from './companies/CompanyDetail';
+import JobList from './jobs/JobList';
+import LoginForm from './forms/LoginForm';
+import SignUpForm from './forms/SignUpForm';
+import Profile from './forms/Profile';
+import Protected from './ProtectedRoute';
 
 const Routes = ({ login, signup }) => {
   return (
@@ -25,21 +26,21 @@ const Routes = ({ login, signup }) => {
           <SignUpForm signup={signup} />
         </Route>
 
-        <Route exact path="/companies">
+        <Protected exact path="/companies">
           <CompanyList />
-        </Route>
+        </Protected>
 
-        <Route exact path="/companies/:handle">
+        <Protected exact path="/companies/:handle">
           <CompanyDetail />
-        </Route>
+        </Protected>
 
-        <Route exact path="/jobs">
+        <Protected exact path="/jobs">
           <JobList />
-        </Route>
+        </Protected>
 
-        <Route exact path="/profile">
+        <Protected exact path="/profile">
           <Profile />
-        </Route>
+        </Protected>
 
         <Redirect to="/" />
       </Switch>

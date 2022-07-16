@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import JoblyApi from './api';
-import JobCardList from './JobCardList';
+import JoblyApi from '../api';
+import JobCardList from '../job/JobCardList';
 
 /** Show details on a company */
 
@@ -28,6 +28,7 @@ const CompanyDetail = () => {
 
   return (
     <div className="CompanyDetail">
+      <img src={company.logoUrl} alt="company logo" />
       <h4>{company.name}</h4>
       <p>{company.description}</p>
       <JobCardList jobs={company.jobs} />

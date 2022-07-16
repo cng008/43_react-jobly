@@ -9,7 +9,7 @@ const NavBar = ({ logout }) => {
     return (
       <nav className="NavBar">
         <NavLink exact to="/">
-          Home
+          Jobly
         </NavLink>
         <NavLink exact to="/companies">
           Companies
@@ -30,7 +30,7 @@ const NavBar = ({ logout }) => {
   return (
     <nav className="NavBar">
       <NavLink exact to="/">
-        Home
+        Jobly
       </NavLink>
       <NavLink exact to="/login">
         Login

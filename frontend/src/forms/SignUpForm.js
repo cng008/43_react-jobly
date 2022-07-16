@@ -1,26 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserContext from './UserContext';
 
-/** Edit user form */
+/** User signup form */
 
-const Profile = ({ update }) => {
-  const { currentUser } = useContext(UserContext);
+const SignUpForm = ({ signup }) => {
   const history = useHistory();
   const INITIAL_STATE = {
-    username: currentUser.username,
-    password: currentUser.password,
-    firstName: currentUser.firstName,
-    lastName: currentUser.lastName,
-    email: currentUser.email
+    username: 'testuser',
+    password: 'password',
+    firstName: 'Test',
+    lastName: 'User',
+    email: 'testuser@email.com'
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [message, setMessage] = useState('');
 
   console.debug(
-    'Profile',
-    'update=',
-    typeof update,
+    'SignupForm',
+    'signup=',
+    typeof signup,
     'formData=',
     formData
     // 'formErrors=',
@@ -38,9 +36,9 @@ const Profile = ({ update }) => {
 
   const handleSubmit = async evt => {
     evt.preventDefault();
-    let res = await update(formData);
+    let res = await signup(formData);
     try {
-      update(formData);
+      signup(formData);
       // makes a POST request to Api.js and adds corresponding data to database
       if (res.ok) {
         history.push('/companies');
@@ -59,12 +57,14 @@ const Profile = ({ update }) => {
   };
 
   return (
-    <div className="Profile">
-      <p>Edit profile for {currentUser.username}</p>
-      <form className="Profile" onSubmit={handleSubmit}>
-        <label htmlFor="username" className="Profile-Label"></label>
+    <div className="SignUpForm">
+      <h1>Sign Up</h1>
+      <form className="SignUpForm-form" onSubmit={handleSubmit}>
+        <label htmlFor="username" className="SignUpForm-Label">
+          Username
+        </label>
         <input
-          className="Profile-Input"
+          className="SignUpForm-Input"
           id="username"
           name="username"
           type="text"
@@ -74,9 +74,11 @@ const Profile = ({ update }) => {
           // autoComplete="off"
           // required
         ></input>
-        <label htmlFor="password" className="Profile-Label"></label>
+        <label htmlFor="password" className="SignUpForm-Label">
+          Password
+        </label>
         <input
-          className="Profile-Input"
+          className="SignUpForm-Input"
           id="password"
           name="password"
           type="text"
@@ -86,9 +88,11 @@ const Profile = ({ update }) => {
           // autoComplete="off"
           // required
         ></input>
-        <label htmlFor="firstName" className="Profile-Label"></label>
+        <label htmlFor="firstName" className="SignUpForm-Label">
+          First Name
+        </label>
         <input
-          className="Profile-Input"
+          className="SignUpForm-Input"
           id="firstName"
           name="firstName"
           type="text"
@@ -98,9 +102,11 @@ const Profile = ({ update }) => {
           // autoComplete="off"
           // required
         ></input>
-        <label htmlFor="lastName" className="Profile-Label"></label>
+        <label htmlFor="lastName" className="SignUpForm-Label">
+          Last Name
+        </label>
         <input
-          className="Profile-Input"
+          className="SignUpForm-Input"
           id="lastName"
           name="lastName"
           type="text"
@@ -110,9 +116,11 @@ const Profile = ({ update }) => {
           // autoComplete="off"
           // required
         ></input>
-        <label htmlFor="email" className="Profile-Label"></label>
+        <label htmlFor="email" className="SignUpForm-Label">
+          Email
+        </label>
         <input
-          className="Profile-Input"
+          className="SignUpForm-Input"
           id="email"
           name="email"
           type="text"
@@ -122,7 +130,7 @@ const Profile = ({ update }) => {
           // autoComplete="off"
           // required
         ></input>
-        <button>Save</button>
+        <button>Sign Up</button>
         <div className="NewItemForm-message">
           {message ? <p>{message}</p> : null}
         </div>
@@ -131,4 +139,4 @@ const Profile = ({ update }) => {
   );
 };
 
-export default Profile;
+export default SignUpForm;

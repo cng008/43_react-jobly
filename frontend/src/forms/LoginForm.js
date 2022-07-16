@@ -51,33 +51,40 @@ const LoginForm = ({ login }) => {
   };
 
   return (
-    <form className="LoginForm" onSubmit={handleSubmit}>
-      <label htmlFor="username" className="LoginForm-Label"></label>
-      <input
-        className="LoginForm-Input"
-        id="username"
-        name="username"
-        type="text"
-        placeholder="Username"
-        value={formData.username}
-        onChange={handleChange}
-        // autoComplete="off"
-        // required
-      ></input>
-      <label htmlFor="password" className="LoginForm-Label"></label>
-      <input
-        className="LoginForm-Input"
-        id="password"
-        name="password"
-        type="text"
-        placeholder="Password"
-        value={formData.password}
-        onChange={handleChange}
-        // autoComplete="off"
-        // required
-      ></input>
-      <button>Login</button>
-    </form>
+    <div className="LoginForm">
+      <h1>Log In</h1>
+      <form className="LoginForm-form" onSubmit={handleSubmit}>
+        <label htmlFor="username" className="LoginForm-Label">
+          Username
+        </label>
+        <input
+          className="LoginForm-Input"
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
+          // autoComplete="off"
+          // required
+        ></input>
+        <label htmlFor="password" className="LoginForm-Label">
+          Password
+        </label>
+        <input
+          className="LoginForm-Input"
+          id="password"
+          name="password"
+          type="text"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          // autoComplete="off"
+          // required
+        ></input>
+        <button>Login</button>
+      </form>
+    </div>
   );
 };
 
