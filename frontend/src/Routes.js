@@ -7,7 +7,7 @@ import CompanyDetail from './companies/CompanyDetail';
 import JobList from './jobs/JobList';
 import LoginForm from './forms/LoginForm';
 import SignUpForm from './forms/SignUpForm';
-import Profile from './forms/Profile';
+import ProfileForm from './forms/ProfileForm';
 import Protected from './ProtectedRoute';
 
 const Routes = ({ login, signup }) => {
@@ -39,7 +39,7 @@ const Routes = ({ login, signup }) => {
         </Protected>
 
         <Protected exact path="/profile">
-          <Profile />
+          <ProfileForm />
         </Protected>
 
         <Redirect to="/" />
