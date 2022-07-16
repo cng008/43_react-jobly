@@ -4,22 +4,22 @@ import { useHistory } from 'react-router-dom';
 /** User signup form */
 
 const LoginForm = ({ login }) => {
+  const history = useHistory();
   const INITIAL_STATE = {
     username: 'testuser',
     password: 'password'
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
-  // const [message, setMessage] = useState('');
-  const history = useHistory();
+  const [formErrors, setFormErrors] = useState([]);
 
   console.debug(
     'LoginForm',
     'login=',
     typeof login,
     'formData=',
-    formData
-    // 'formErrors=',
-    // formErrors
+    formData,
+    'formErrors=',
+    formErrors
   );
 
   /** Update form fields */
@@ -31,19 +31,18 @@ const LoginForm = ({ login }) => {
       [name]: value
     }));
   };
+
   const handleSubmit = async evt => {
     evt.preventDefault();
     try {
-      login(formData);
+      let result = await login(formData);
       // makes a POST request to Api.js and adds corresponding data to matching category in db.json
-      // if (res.ok) {
-      //   setFormData(INITIAL_STATE);
-      //   setMessage('Item added successfully');
-      // } else {
-      //   setMessage('An error occured');
-      // }
+      if (result.success) {
+        history.push('/companies');
+      } else {
+        setFormErrors(result.errors);
+      }
       // imperatively redirect to correct page and refresh to see new data
-      history.push('/companies');
       // window.location.reload(false);
     } catch (err) {
       console.log(err);
@@ -65,8 +64,7 @@ const LoginForm = ({ login }) => {
           placeholder="Username"
           value={formData.username}
           onChange={handleChange}
-          // autoComplete="off"
-          // required
+          required
         ></input>
         <label htmlFor="password" className="LoginForm-Label">
           Password
@@ -79,9 +77,11 @@ const LoginForm = ({ login }) => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          // autoComplete="off"
-          // required
+          required
         ></input>
+        <div className="NewItemForm-message">
+          {formErrors ? <p>{formErrors}</p> : null}
+        </div>
         <button>Login</button>
       </form>
     </div>

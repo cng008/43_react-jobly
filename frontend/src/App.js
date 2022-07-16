@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Routes from './Routes';
 import { BrowserRouter } from 'react-router-dom';
+import useLocalStorage from './useLocalStorage';
 import JoblyApi from './api';
 import jwt from 'jsonwebtoken';
+import NavBar from './NavBar';
+import Routes from './Routes';
+import UserContext from './UserContext';
 import './App.css';
 
-import NavBar from './NavBar';
-import UserContext from './UserContext';
+// Key name for storing token in localStorage for "remember me" re-login
+export const TOKEN_STORAGE_ID = 'jobly-token';
 
 const App = () => {
   const [infoLoaded, setInfoLoaded] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState('token');
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
-  console.debug(
-    'App',
-    'isLoggedIn=',
-    isLoggedIn,
-    'currentUser=',
-    currentUser,
-    'token=',
-    token
-  );
+  console.debug('App', 'currentUser=', currentUser, 'token=', token);
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -56,7 +50,6 @@ const App = () => {
       let token = await JoblyApi.signup(signupData);
       setToken(token);
       JoblyApi.token = token;
-      setIsLoggedIn(true);
       setCurrentUser(token);
       return { success: true };
     } catch (errors) {
@@ -70,7 +63,6 @@ const App = () => {
     try {
       let token = await JoblyApi.login(loginData);
       setToken(token);
-      setIsLoggedIn(true);
       setCurrentUser(token);
       return { success: true };
     } catch (errors) {
@@ -81,7 +73,6 @@ const App = () => {
 
   /** Handles site-wide logout. */
   const logout = () => {
-    setIsLoggedIn(false);
     setCurrentUser(null);
     setToken('token');
   };

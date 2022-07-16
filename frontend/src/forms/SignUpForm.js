@@ -13,16 +13,16 @@ const SignUpForm = ({ signup }) => {
     email: 'testuser@email.com'
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
-  const [message, setMessage] = useState('');
+  const [formErrors, setFormErrors] = useState([]);
 
   console.debug(
     'SignupForm',
     'signup=',
     typeof signup,
     'formData=',
-    formData
-    // 'formErrors=',
-    // formErrors
+    formData,
+    'formErrors=',
+    formErrors
   );
 
   /** Update form fields */
@@ -36,23 +36,18 @@ const SignUpForm = ({ signup }) => {
 
   const handleSubmit = async evt => {
     evt.preventDefault();
-    let res = await signup(formData);
     try {
-      signup(formData);
-      // makes a POST request to Api.js and adds corresponding data to database
-      if (res.ok) {
+      let result = await signup(formData);
+      // makes a POST request to Api.js and adds corresponding data to matching category in db.json
+      if (result.success) {
         history.push('/companies');
-        setFormData(INITIAL_STATE);
-        setMessage('Item added successfully');
       } else {
-        setMessage('An error occured');
-        // setFormErrors(result.errors);
+        setFormErrors(result.errors);
       }
       // imperatively redirect to correct page and refresh to see new data
       // window.location.reload(false);
     } catch (err) {
       console.log(err);
-      setMessage(err);
     }
   };
 
@@ -71,8 +66,7 @@ const SignUpForm = ({ signup }) => {
           placeholder="Username"
           value={formData.username}
           onChange={handleChange}
-          // autoComplete="off"
-          // required
+          required
         ></input>
         <label htmlFor="password" className="SignUpForm-Label">
           Password
@@ -85,8 +79,7 @@ const SignUpForm = ({ signup }) => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-          // autoComplete="off"
-          // required
+          required
         ></input>
         <label htmlFor="firstName" className="SignUpForm-Label">
           First Name
@@ -99,8 +92,7 @@ const SignUpForm = ({ signup }) => {
           placeholder="First Name"
           value={formData.firstName}
           onChange={handleChange}
-          // autoComplete="off"
-          // required
+          required
         ></input>
         <label htmlFor="lastName" className="SignUpForm-Label">
           Last Name
@@ -113,8 +105,7 @@ const SignUpForm = ({ signup }) => {
           placeholder="Last Name"
           value={formData.lastName}
           onChange={handleChange}
-          // autoComplete="off"
-          // required
+          required
         ></input>
         <label htmlFor="email" className="SignUpForm-Label">
           Email
@@ -127,13 +118,12 @@ const SignUpForm = ({ signup }) => {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          // autoComplete="off"
-          // required
+          required
         ></input>
-        <button>Sign Up</button>
-        <div className="NewItemForm-message">
-          {message ? <p>{message}</p> : null}
+        <div className="NewItemForm-formErrors">
+          {formErrors ? <p>{formErrors}</p> : null}
         </div>
+        <button>Sign Up</button>
       </form>
     </div>
   );
