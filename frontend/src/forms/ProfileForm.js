@@ -3,6 +3,7 @@ import { Card, CardBody, Form, Label, Input, Button } from 'reactstrap';
 
 import UserContext from '../UserContext';
 import JoblyApi from '../common/api';
+import JobsAppliedTo from '../jobs/JobsAppliedTo';
 
 /** Edit profile form.
  *
@@ -16,7 +17,7 @@ import JoblyApi from '../common/api';
  * Routes -> ProfileForm
  */
 
-const ProfileForm = () => {
+const ProfileForm = ({ deleteUser }) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const INITIAL_STATE = {
     username: currentUser.username,
@@ -28,6 +29,7 @@ const ProfileForm = () => {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [formErrors, setFormErrors] = useState([]);
   const [message, setMessage] = useState('');
+  const [isShown, setIsShown] = useState(false);
 
   console.debug(
     'ProfileForm',
@@ -38,6 +40,10 @@ const ProfileForm = () => {
     'formErrors=',
     formErrors
   );
+
+  const showApps = () => {
+    setIsShown(current => !current);
+  };
 
   /** Update form fields */
   const handleChange = evt => {
@@ -158,6 +164,13 @@ const ProfileForm = () => {
           </Form>
         </CardBody>
       </Card>
+      {/* Toggles list of jobs to show on page */}
+      <div className="Expand text-center">
+        <Button onClick={showApps} className="btn-sm m-3" color="info">
+          {isShown ? 'Hide Applied Jobs' : 'Show Applied Jobs'}
+        </Button>
+      </div>
+      {isShown && <JobsAppliedTo />}
     </div>
   );
 };

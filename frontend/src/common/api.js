@@ -52,10 +52,16 @@ class JoblyApi {
     return res.company;
   }
 
-  /** Get jobs (filtered by name if not undefined) */
+  /** Get jobs by title (filtered by name if not undefined) */
   static async getJobs(title) {
     let res = await this.request('jobs', { title });
     return res.jobs;
+  }
+
+  /** Get jobs by id */
+  static async getJobsByID(id) {
+    let res = await this.request(`jobs/${id}`);
+    return res.job;
   }
 
   /** Signup for site. */
