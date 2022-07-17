@@ -9,6 +9,7 @@ import NavBar from './routes-nav/NavBar';
 import Routes from './routes-nav/Routes';
 import UserContext from './UserContext';
 import './App.css';
+import LoadingSpinner from './common/LoadingSpinner';
 
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = 'jobly-token';
@@ -123,7 +124,7 @@ const App = () => {
   };
 
   if (!infoLoaded) {
-    return <p>Loading &hellip;</p>;
+    return <LoadingSpinner />;
   }
 
   return (

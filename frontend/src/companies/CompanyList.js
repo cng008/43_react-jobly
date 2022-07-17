@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../forms/SearchBar';
 import JoblyApi from '../common/api';
 import CompanyCard from './CompanyCard';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 /** Show list of all companies.
  *
@@ -31,7 +32,7 @@ const CompanyList = () => {
   }
 
   if (isLoading) {
-    return <p>Loading &hellip;</p>;
+    return <LoadingSpinner />;
   }
 
   return (

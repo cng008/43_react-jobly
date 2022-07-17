@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import JoblyApi from '../common/api';
 import SearchBar from '../forms/SearchBar';
 import JobCardList from './JobCardList';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 /** Show list of all jobs.
  *
@@ -31,7 +32,7 @@ const JobList = () => {
   }
 
   if (isLoading) {
-    return <p>Loading &hellip;</p>;
+    return <LoadingSpinner />;
   }
 
   return (

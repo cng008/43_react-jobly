@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import JoblyApi from '../common/api';
 import JobCardList from '../jobs/JobCardList';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 /** Show details on a company
  * Renders information about company, along with the jobs at that company.
@@ -29,7 +30,7 @@ const CompanyDetail = () => {
   }, [handle]);
 
   if (isLoading) {
-    return <p>Loading &hellip;</p>;
+    return <LoadingSpinner />;
   }
 
   return (
