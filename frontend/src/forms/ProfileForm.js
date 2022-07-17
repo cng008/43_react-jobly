@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Card, CardBody, Form, Label, Input, Button } from 'reactstrap';
 
 import UserContext from '../UserContext';
-import JoblyApi from '../api';
+import JoblyApi from '../common/api';
 
 /** Edit profile form.
  *

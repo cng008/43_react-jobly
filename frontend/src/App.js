@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import useLocalStorage from './useLocalStorage';
+import useLocalStorage from './common/useLocalStorage';
 import jwt from 'jsonwebtoken';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import JoblyApi from './api';
+import JoblyApi from './common/api';
 import NavBar from './routes-nav/NavBar';
 import Routes from './routes-nav/Routes';
 import UserContext from './UserContext';

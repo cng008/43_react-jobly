@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import JoblyApi from '../api';
+import JoblyApi from '../common/api';
 import JobCardList from '../jobs/JobCardList';
 
 /** Show details on a company
