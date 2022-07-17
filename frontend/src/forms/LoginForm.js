@@ -16,8 +16,8 @@ import { Card, CardBody, Form, Label, Input, Button } from 'reactstrap';
 const LoginForm = ({ login }) => {
   const history = useHistory();
   const INITIAL_STATE = {
-    username: 'testuser',
-    password: 'password'
+    username: '',
+    password: ''
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [formErrors, setFormErrors] = useState([]);

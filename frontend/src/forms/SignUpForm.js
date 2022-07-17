@@ -16,11 +16,11 @@ import { Card, CardBody, Form, Label, Input, Button } from 'reactstrap';
 const SignUpForm = ({ signup }) => {
   const history = useHistory();
   const INITIAL_STATE = {
-    username: 'testuser',
-    password: 'password',
-    firstName: 'Test',
-    lastName: 'User',
-    email: 'testuser@email.com'
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    email: ''
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [formErrors, setFormErrors] = useState([]);
