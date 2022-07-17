@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import { Card, CardBody, Form, Label, Input, Button } from 'reactstrap';
+
 import UserContext from '../UserContext';
 import JoblyApi from '../api';
 
@@ -83,68 +85,79 @@ const ProfileForm = () => {
   };
 
   return (
-    <div className="Profile">
+    <div className="Profile col-md-5 offset-md-4 col-lg-4 offset-lg-4">
       <h1>Profile</h1>
-      <form className="ProfileForm-form" onSubmit={handleSubmit}>
-        <label htmlFor="username" className="ProfileForm-Label">
-          Username
-        </label>
-        <p>@{currentUser.username}</p>
-        <label htmlFor="firstName" className="ProfileForm-Label">
-          First Name
-        </label>
-        <input
-          className="ProfileForm-Input"
-          id="firstName"
-          name="firstName"
-          type="text"
-          placeholder="First Name"
-          value={formData.firstName}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="lastName" className="ProfileForm-Label">
-          Last Name
-        </label>
-        <input
-          className="ProfileForm-Input"
-          id="lastName"
-          name="lastName"
-          type="text"
-          placeholder="Last Name"
-          value={formData.lastName}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="email" className="ProfileForm-Label">
-          Email
-        </label>
-        <input
-          className="ProfileForm-Input"
-          id="email"
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="password" className="ProfileForm-Label">
-          Confirm password to make changes:
-        </label>
-        <input
-          className="ProfileForm-Input"
-          id="password"
-          name="password"
-          type="text"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        ></input>
-        <button>Save Changes</button>
-        <div className="ProfileForm-message">
-          {formErrors ? <p>{formErrors}</p> : null}
-          {message ? <p>{message}</p> : null}
-        </div>
-      </form>
+      <Card>
+        <CardBody>
+          <Form className="ProfileForm-form" onSubmit={handleSubmit}>
+            <Label htmlFor="username" className="ProfileForm-Label">
+              Username
+            </Label>
+            <p>@{currentUser.username}</p>
+            <Label htmlFor="firstName" className="ProfileForm-Label">
+              First Name
+            </Label>
+            <Input
+              className="ProfileForm-Input"
+              id="firstName"
+              name="firstName"
+              type="text"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
+            ></Input>
+            <Label htmlFor="lastName" className="ProfileForm-Label">
+              Last Name
+            </Label>
+            <Input
+              className="ProfileForm-Input"
+              id="lastName"
+              name="lastName"
+              type="text"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleChange}
+            ></Input>
+            <Label htmlFor="email" className="ProfileForm-Label">
+              Email
+            </Label>
+            <Input
+              className="ProfileForm-Input"
+              id="email"
+              name="email"
+              type="text"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            ></Input>
+            <Label htmlFor="password" className="ProfileForm-Label">
+              Confirm password to make changes:
+            </Label>
+            <Input
+              className="ProfileForm-Input"
+              id="password"
+              name="password"
+              type="text"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            ></Input>
+            <span className="ProfileForm-message">
+              {formErrors ? <p>{formErrors}</p> : null}
+              {message ? <p>{message}</p> : null}
+            </span>
+            <Button
+              type="submit"
+              className="btn btn-lg btn-block"
+              color="primary"
+              outline
+            >
+              Save Changes
+            </Button>
+          </Form>
+        </CardBody>
+      </Card>
     </div>
   );
 };

@@ -33,9 +33,18 @@ const CompanyDetail = () => {
   }
 
   return (
-    <div className="CompanyDetail">
-      <img src={company.logoUrl} alt="company logo" />
-      <h4>{company.name}</h4>
+    <div className="CompanyDetail col-md-8 offset-md-2">
+      <h2>
+        {company.name}
+        {company.logoUrl ? (
+          <img
+            src={company.logoUrl}
+            alt="company logo"
+            className="float-right ml-5"
+            style={{ width: '4em' }}
+          />
+        ) : null}
+      </h2>
       <p>{company.description}</p>
       <JobCardList jobs={company.jobs} />
     </div>

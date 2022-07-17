@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
+
 import UserContext from '../UserContext';
+import './JobCard.css';
 
 /** Individual card component for JobList.
  *
@@ -28,15 +31,22 @@ const JobCard = ({ id, title, salary, equity, companyName }) => {
   }
 
   return (
-    <div className="JobCard" key={id}>
-      <h3>{title}</h3>
-      <h4>{companyName}</h4>
-      <p>Salary: {salary ? salary : 'TBA'}</p>
-      <p>Equity: {equity ? equity : 0}</p>
-      <button onClick={handleApply} disabled={applied}>
-        {applied ? 'Applied' : 'Apply'}
-      </button>
-    </div>
+    <Card key={id} className="JobCard mb-3">
+      <CardBody>
+        <CardTitle>{title}</CardTitle>
+        <h6>{companyName}</h6>
+        <CardText>Salary: {salary ? salary : 'TBA'}</CardText>
+        <CardText>Equity: {equity ? equity : 0}</CardText>
+        <Button
+          onClick={handleApply}
+          disabled={applied}
+          color="danger"
+          className="font-weight-bold text-uppercase float-right"
+        >
+          {applied ? 'Applied' : 'Apply'}
+        </Button>
+      </CardBody>
+    </Card>
   );
 };
 

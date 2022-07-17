@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Label, Input, Button } from 'reactstrap';
 
 /** Search widget.
  *
@@ -29,21 +30,25 @@ const SearchBar = ({ searchFor }) => {
   };
 
   return (
-    <form className="SearchBar" onSubmit={handleSubmit}>
-      <label htmlFor="search" className="SearchBar-Label"></label>
-      <input
-        className="SearchBar-Input"
-        id="search"
-        name="search"
-        type="text"
-        placeholder="Enter search term"
-        value={searchTerm}
-        onChange={handleChange}
-        autoComplete="off"
-        // required
-      ></input>
-      <button>Search</button>
-    </form>
+    <div className="SearchForm my-4">
+      <Form className="SearchBar form-inline" onSubmit={handleSubmit}>
+        <Label htmlFor="search" className="SearchBar-Label"></Label>
+        <Input
+          className="SearchBar-Input form-control form-control-lg flex-grow-1"
+          id="search"
+          name="search"
+          type="text"
+          placeholder="Enter search term"
+          value={searchTerm}
+          onChange={handleChange}
+          autoComplete="off"
+          // required
+        ></Input>
+        <Button className="btn-lg" color="primary">
+          Search
+        </Button>
+      </Form>
+    </div>
   );
 };
 

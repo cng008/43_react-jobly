@@ -35,9 +35,8 @@ const CompanyList = () => {
   }
 
   return (
-    <div className="CompanyList">
+    <div className="CompanyList col-md-8 offset-md-2">
       <SearchBar searchFor={search} />
-      <p>List of all companies:</p>
       {companies.length ? (
         <div className="CompanyList-list">
           {companies.map(c => (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Card, CardBody, Form, Label, Input, Button } from 'reactstrap';
 
 /** User login form.
  *
@@ -48,7 +49,7 @@ const LoginForm = ({ login }) => {
       // makes a POST request to Api.js and adds corresponding data to matching category in db.json
       if (result.success) {
         // imperatively redirect to correct page and refresh to see new data
-        history.push('/companies');
+        history.push('/');
       } else {
         setFormErrors(result.errors);
       }
@@ -58,40 +59,42 @@ const LoginForm = ({ login }) => {
   };
 
   return (
-    <div className="LoginForm">
+    <div className="LoginForm col-md-5 offset-md-4 col-lg-4 offset-lg-4">
       <h1>Log In</h1>
-      <form className="LoginForm-form" onSubmit={handleSubmit}>
-        <label htmlFor="username" className="LoginForm-Label">
-          Username
-        </label>
-        <input
-          className="LoginForm-Input"
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        ></input>
-        <label htmlFor="password" className="LoginForm-Label">
-          Password
-        </label>
-        <input
-          className="LoginForm-Input"
-          id="password"
-          name="password"
-          type="text"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        ></input>
-        <div className="NewItemForm-message">
-          {formErrors ? <p>{formErrors}</p> : null}
-        </div>
-        <button>Login</button>
-      </form>
+      <Card>
+        <CardBody>
+          <Form onSubmit={handleSubmit}>
+            <Label htmlFor="username">Username</Label>
+            <Input
+              name="username"
+              type="text"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            ></Input>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              name="password"
+              type="text"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            ></Input>
+            <span className="NewItemForm-message">
+              {formErrors ? <p>{formErrors}</p> : null}
+            </span>
+            <Button
+              type="submit"
+              className="btn btn-lg btn-block"
+              color="primary"
+            >
+              Login
+            </Button>
+          </Form>
+        </CardBody>
+      </Card>
     </div>
   );
 };
