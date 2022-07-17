@@ -171,6 +171,15 @@ const ProfileForm = ({ deleteUser }) => {
         </Button>
       </div>
       {isShown && <JobsAppliedTo />}
+      <div className="Delete text-center">
+        <button
+          onClick={deleteUser}
+          className="btn btn-link my-5"
+          style={{ color: 'red' }}
+        >
+          Delete my profile
+        </button>
+      </div>
     </div>
   );
 };

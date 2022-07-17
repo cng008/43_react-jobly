@@ -18,7 +18,7 @@ import Protected from './ProtectedRoute';
  * Visiting a non-existant route redirects to the homepage.
  */
 
-const Routes = ({ login, signup }) => {
+const Routes = ({ login, signup, deleteUser }) => {
   return (
     <>
       <Switch>
@@ -47,7 +47,7 @@ const Routes = ({ login, signup }) => {
         </Protected>
 
         <Protected exact path="/profile">
-          <ProfileForm />
+          <ProfileForm deleteUser={deleteUser} />
         </Protected>
 
         <Redirect to="/" />

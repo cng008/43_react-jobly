@@ -82,6 +82,12 @@ class JoblyApi {
     return res.user;
   }
 
+  /** Delete user profile. */
+  static async deleteProfile(username) {
+    await this.request(`users/${username}`, {}, 'delete');
+  }
+
+  /** Save job to current user. */
   static async applyToJob(username, jobID) {
     await this.request(`users/${username}/jobs/${jobID}`, {}, 'post');
   }

@@ -105,6 +105,18 @@ const App = () => {
     }
   }
 
+  /** Deletes a user and all their data */
+  async function deleteUser() {
+    try {
+      await JoblyApi.deleteProfile(currentUser.username);
+      logout();
+      return { success: true };
+    } catch (errors) {
+      console.error('delete failed', errors);
+      return { success: false, errors };
+    }
+  }
+
   /** Checks if a job has been applied for. */
   function hasAppliedToJob(id) {
     return applicationIds.has(id);
@@ -119,6 +131,7 @@ const App = () => {
 
   /** Handles site-wide logout. */
   const logout = () => {
+    setApplicationIds(null);
     setCurrentUser(null);
     setToken('token');
   };
@@ -134,7 +147,7 @@ const App = () => {
           value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}
         >
           <NavBar logout={logout} />
-          <Routes login={login} signup={signup} />
+          <Routes login={login} signup={signup} deleteUser={deleteUser} />
         </UserContext.Provider>
       </BrowserRouter>
     </div>
