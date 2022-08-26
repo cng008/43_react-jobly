@@ -141,7 +141,7 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <div className="App mb-5">
       <BrowserRouter>
         <UserContext.Provider
           value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}
